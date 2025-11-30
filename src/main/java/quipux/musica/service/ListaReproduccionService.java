@@ -21,15 +21,14 @@ public class ListaReproduccionService {
         return repository.findAll();
     }
 
-    public List<ListaReproduccion> getAllByName(String nombre){
-        return repository.findByNombre(nombre);
+    public Optional<ListaReproduccion> getAllByName(String nombre){
+        Optional<ListaReproduccion> listaExist =repository.findByNombre(nombre)!=null ?
+                Optional.of(repository.findByNombre(nombre)) : Optional.empty();
+        return listaExist;
     }
 
     public ListaReproduccion save (ListaReproduccion lista){
-
-
-        for (int i=0;i<lista.getCanciones().size();i++){
-
+    for (int i=0;i<lista.getCanciones().size();i++){
             try{
                 Cancion cancion= repositoryCancion.findByTitulo(lista.getCanciones().get(i).getTitulo());
                 lista.getCanciones().get(i).setId(cancion.getId());
@@ -43,19 +42,18 @@ public class ListaReproduccionService {
 
 
             }
+    return repository.save(lista);
 
+    }
 
-
-        return repository.save(lista);
-
-
-
-
-
-
-
-
-
+    public boolean deleteLista(String titulo) {
+        Optional<ListaReproduccion> listaExist =repository.findByNombre(titulo)!=null ?
+                Optional.of(repository.findByNombre(titulo)) : Optional.empty();
+        if (listaExist.isPresent()) {
+            repository.deleteById(listaExist.get().getId());
+            return true;
+        }
+        return false;
 
 
     }

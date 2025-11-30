@@ -10,5 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ListaReproduccionRepository extends JpaRepository<ListaReproduccion, Long> {
-    List<ListaReproduccion> findByNombre(String nombre);
+    ListaReproduccion findByNombre(String nombre);
 }

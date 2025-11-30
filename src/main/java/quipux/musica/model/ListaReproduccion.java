@@ -2,6 +2,7 @@ package quipux.musica.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,6 +18,8 @@ public class ListaReproduccion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank(message = "El nombre debe ser obligatorio")
     private String nombre;
     private String descripcion;
     @ManyToMany(fetch =  FetchType.LAZY)
