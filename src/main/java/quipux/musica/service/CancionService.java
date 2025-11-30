@@ -13,10 +13,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class CancionService {
 
-    private CancionRepository repository;
+    private final CancionRepository repository;
 
-    public List<Cancion> getAllCanciones (){
-        return null;
+    public List<Cancion> getAllCanciones(){
+        return repository.findAll();
     }
     public Cancion getByTitulo(String titulo){
         return repository.findByTitulo(titulo);
