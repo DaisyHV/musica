@@ -53,11 +53,13 @@ public class ListaReproduccionController {
     }
 
     @DeleteMapping("{listName}")
-    public ResponseEntity<List<ListaReproduccion>> deleteLista (@PathVariable String listName){
+    public ResponseEntity<Boolean> deleteLista (@PathVariable String listName){
         if (service.deleteLista(listName)){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            //return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<Boolean>(true, HttpStatus.NO_CONTENT);
+        }else {
+            return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<List<ListaReproduccion>>(HttpStatus.NOT_FOUND);
     }
 
 
